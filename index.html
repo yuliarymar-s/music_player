@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+</head>
+
+<body>
+    <div class="loader">
+        <img src="./image/loader.gif" alt="">
+    </div>
+
+    <header>
+        <aside>
+            <div class="logo">
+                <img src="./image/logo (1).png" alt="">
+                <img src="./image/mini_logo.png" alt="" class="small_screen_logo">
+            </div>
+            <div class="small_logo">
+                <img src="./image/mini_logo.png" alt="">
+            </div>
+            <div class="music_menu">
+                <h2>Browse Music</h2>
+                <ul>
+                    <li><a href="#" class="active_link"><span class="icon icon_discover"></span>
+                            <p>Discover</p>
+                        </a></li>
+                    <li><a href="#"><span class="icon icon_artists"></span>
+                            <p>Artists</p>
+                        </a></li>
+                    <li><a href="#"><span class="icon icon_albums"></span>
+                            <p>Albums</p>
+                        </a></li>
+                    <li><a href="#"><span class="icon icon_stations"></span>
+                            <p>Stations</p>
+                        </a></li>
+                    <li><a href="#"><span class="icon icon_music"></span>
+                            <p>Music</p>
+                        </a></li>
+                </ul>
+                <h2>Your Music</h2>
+                <ul>
+                    <li><a href="#"><span class="icon icon_downloads"></span>
+                            <p>Downloads</p>
+                        </a></li>
+                    <li><a href="#"><span class="icon icon_purchased"></span>
+                            <p>Purchased</p>
+                        </a></li>
+                    <li><a href="#"><span class="icon icon_favourites"></span>
+                            <p>Favourites</p>
+                        </a></li>
+                    <li><a href="#"><span class="icon icon_history"></span>
+                            <p>History</p>
+                        </a></li>
+                </ul>
+                <h2>Options</h2>
+                <ul>
+                    <li><a href="#" id="about-us-link"><span class="icon icon_about"></span>
+                            <p>About Us</p>
+                        </a></li>
+                </ul>
+                <button class="create-playlist-btn"><i class="ri-play-list-add-fill"></i> Create Playlist</button>
+            </div>
+            <span class="sidebar_btn"><i class="ri-arrow-left-s-line"></i></span>
+        </aside>
+
+        <div class="hero_container">
+            <div class="hero_top">
+                <div class="hero_top_col">
+                    <div class="search_box">
+                        <input type="text" placeholder="Search Songs, Artists, Playlists...">
+                        <i class="ri-search-2-line"></i>
+                    </div>
+                    <span class="notification_icon"></span>
+                </div>
+                <div class="user_info">
+                    <div class="user_img"><img src="./image/proflile.jpg" alt=""></div>
+                    <div class="user_login_wrapper">
+                        <h2>Hello, David <i class="ri-arrow-down-s-fill"></i></h2>
+                        <ul class="user_wrapper_dropdown">
+                            <li><a href="#"><i class="ri-user-line"></i>
+                                    <p>Profile</p>
+                                </a></li>
+                        </ul>
+                    </div>
+                    <div class="bars"><i class="ri-menu-2-fill"></i></div>
+                </div>
+            </div>
+
+            <div class="songs_container">
+                <div class="songs_tabs">
+                    <h2 class="tab1 active_song_list" data-tab="top-picks">Today Top Picks</h2>
+                    <h2 class="tab2" data-tab="trending">Trending Songs</h2>
+                    <h2 class="tab3" data-tab="new-release">New Release</h2>
+                </div>
+                <div class="songs_wrapper" id="song-list"></div>
+            </div>
+
+            <div class="playback-container">
+                <div class="track-info">
+                    <img src="./image/s1.jpg" alt="Cover" class="cover-art">
+                    <div class="track-details">
+                        <h3 id="track-title">Track Title</h3>
+                        <p id="track-artist">Artist</p>
+                    </div>
+                    <div class="loading-indicator" id="loading-indicator">
+                        <i class="ri-loader-4-line"></i>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button id="shuffle-btn" class="control-btn"><i class="ri-shuffle-fill"></i></button>
+                    <button id="prev-btn" class="control-btn"><i class="ri-skip-back-fill"></i></button>
+                    <button id="play-pause-btn" class="control-btn"><i class="ri-play-fill"></i></button>
+                    <button id="next-btn" class="control-btn"><i class="ri-skip-forward-fill"></i></button>
+                    <button id="stop-btn" class="control-btn"><i class="ri-stop-fill"></i></button>
+                    <button id="repeat-btn" class="control-btn"><i class="ri-repeat-line"></i></button>
+                </div>
+                <div class="progress-volume">
+                    <input type="range" id="progress-bar" min="0" max="100" value="0">
+                    <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+                    <input type="range" id="volume-slider" min="0" max="100" value="50">
+                    <i class="ri-volume-up-fill"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="modal" id="playlist-modal">
+        <div class="modal-content">
+            <span class="close-modal"><i class="ri-close-line"></i></span>
+            <h2>Create New Playlist</h2>
+            <input type="text" id="playlist-name" placeholder="Enter playlist name">
+            <div class="modal-buttons">
+                <button id="cancel-playlist">Cancel</button>
+                <button id="save-playlist">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="about-us-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-about-us"><i class="ri-close-line"></i></span>
+            <h2>About Our Music Player</h2>
+            <p>This is a custom-built music player designed for seamless music enjoyment. Features include playlist
+                creation, song search, and a sleek interface. Built with love by xAI enthusiasts!</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
